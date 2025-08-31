@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Todo List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="app-title">
+                    <span class="title-icon">✨</span>
+                    Todo List
+                </h1>
+                <div class="header-controls">
+                    <div class="task-stats">
+                        <span class="stat-item">
+                            <span class="stat-number" id="totalTasks">0</span>
+                            <span class="stat-label">Total</span>
+                        </span>
+                        <span class="stat-item">
+                            <span class="stat-number" id="activeTasks">0</span>
+                            <span class="stat-label">Active</span>
+                        </span>
+                        <span class="stat-item">
+                            <span class="stat-number" id="completedTasks">0</span>
+                            <span class="stat-label">Done</span>
+                        </span>
+                    </div>
+                    <button class="theme-toggle" id="themeToggle">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Task Input Section -->
+        <section class="task-input-section">
+            <div class="input-container">
+                <div class="input-row">
+                    <div class="task-input-wrapper">
+                        <input 
+                            type="text" 
+                            id="taskInput" 
+                            class="task-input" 
+                            placeholder="What needs to be done?"
+                            maxlength="200"
+                        >
+                        <button class="add-btn" id="addBtn">
+                            <span class="btn-icon">+</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="input-options">
+                    <div class="date-time-group">
+                        <input type="date" id="taskDate" class="date-input">
+                        <input type="time" id="taskTime" class="time-input">
+                    </div>
+                    <select id="taskPriority" class="priority-select">
+                        <option value="low">Low Priority</option>
+                        <option value="medium" selected>Medium Priority</option>
+                        <option value="high">High Priority</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter and Sort Section -->
+        <section class="controls-section">
+            <div class="filter-controls">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">
+                        All Tasks
+                    </button>
+                    <button class="filter-btn" data-filter="active">
+                        Active
+                    </button>
+                    <button class="filter-btn" data-filter="completed">
+                        Completed
+                    </button>
+                </div>
+                <div class="control-group">
+                    <div class="search-wrapper">
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            class="search-input" 
+                            placeholder="Search tasks..."
+                        >
+                        <span class="search-icon">🔍</span>
+                    </div>
+                    <select id="sortSelect" class="sort-select">
+                        <option value="dateAdded">Sort by: Date Added</option>
+                        <option value="dueDate">Sort by: Due Date</option>
+                        <option value="priority">Sort by: Priority</option>
+                        <option value="alphabetical">Sort by: A-Z</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Task List Section -->
+        <section class="task-list-section">
+            <div class="task-list" id="taskList">
+                <!-- Tasks will be dynamically inserted here -->
+            </div>
+            <div class="empty-state" id="emptyState">
+                <div class="empty-icon">📝</div>
+                <h3>No tasks yet</h3>
+                <p>Add your first task to get started!</p>
+            </div>
+        </section>
+
+        <!-- Footer Section -->
+        <footer class="footer">
+            <div class="footer-content">
+                <button class="clear-completed-btn" id="clearCompleted">
+                    Clear Completed
+                </button>
+                <div class="task-counter">
+                    <span id="taskCounter">0 items left</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal hidden" id="editModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Task</h3>
+                <button class="modal-close" id="modalClose">×</button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="editTaskInput" class="form-control" placeholder="Task description">
+                <div class="modal-options">
+                    <div class="date-time-group">
+                        <input type="date" id="editTaskDate" class="form-control">
+                        <input type="time" id="editTaskTime" class="form-control">
+                    </div>
+                    <select id="editTaskPriority" class="form-control">
+                        <option value="low">Low Priority</option>
+                        <option value="medium">Medium Priority</option>
+                        <option value="high">High Priority</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn--secondary" id="cancelEdit">Cancel</button>
+                <button class="btn btn--primary" id="saveEdit">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay hidden" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
